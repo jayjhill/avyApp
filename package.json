@@ -1,7 +1,7 @@
 {
   "name": "avyapp",
   "version": "1.0.0",
-  "description": "Scrape UAC forecast",
+  "description": "frontend for utAvyWebApp",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,13 +15,5 @@
   "bugs": {
     "url": "https://github.com/jayjhill/avyApp/issues"
   },
-  "homepage": "https://github.com/jayjhill/avyApp#readme",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.5",
-    "jsdom": "^16.4.0",
-    "nightmare": "^3.0.2",
-    "require": "^2.4.20",
-    "uniq": "^1.0.1",
-    "xvfb": "^0.4.0"
-  }
+  "homepage": "https://github.com/jayjhill/avyApp#readme"
 }
