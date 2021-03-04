@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>Intro to SceneLayer | Sample | ArcGIS API for JavaScript 4.18</title>
+    <title>Avalanche Aspect App</title>
     <style>
       html,
       body,
@@ -24,8 +24,13 @@ color: white;
 
     <script>
       require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer"], function(Map, SceneView, SceneLayer, GeoJSONLayer) {
+
+        avyGridTop = [];
+
+        url = "http://mountainlabmaps.com/avy/json/SLC_GreaterThan9500.geojson";
+
         // Create Map
-        var map = new Map({
+ var map = new Map({
           basemap: "topo-vector",
           ground: "world-elevation"
         });
@@ -41,11 +46,9 @@ color: white;
           }
         });
 
-        const url =
-          "http://mountainlabmaps.com/avy/json/SLC_GreaterThan9500.geojson";
+const task1 = ()=>{
 
-
-const topArray = [
+var topArray = [
     {x: 198, y: 132},
     {x: 219, y: 138},
     {x: 233, y: 157},
@@ -58,82 +61,44 @@ const topArray = [
 
 
 
-// Get the CanvasPixelArray from the given coordinates and dimensions.
-// var imgd = ImageData.data[((50 * (ImageData.width * 4)) + (200 * 4)) + 2];
-// console.log(imgd);
-// var pix = imgd.data;
+
 
 
 var img = new Image();
-//img.crossOrigin = 'anonymous';
 img.src = 'https://mountainlabmaps.com/images/avy20210303.png';
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 img.onload = function() {
   ctx.drawImage(img, 0, 0);
   img.style.display = 'none';
+  console.log("img loaded");
+    topArray.forEach(pickArray);
 };
-var hoveredColor = document.getElementById('hovered-color');
-var selectedColor = document.getElementById('selected-color');
-
-
-// //grab rgb from x,y
-// var topNorth = ctx.getImageData(198, 132, 1, 1).topNorth;
-// console.log(topNorth);
-// var rgbTopNorth = [ topNorth[0], topNorth[1], topNorth[2] ];
-// console.log(rgbTopNorth);
-
-// function getPixelXY(imgData, x, y) {
-//   return getPixel(imgData, y*imgData.width+x);
-// }
-
-
-function pick(event, destination) {
-  var x = event.layerX;
-  var y = event.layerY;
-  var pixel = ctx.getImageData(x, y, 1, 1);
-  var data = pixel.data;
-
-
-const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
-    const comboText = ["X: " + x + ", Y: " + y + ", " + "rgb: " + rgba];
-destination.style.background = rgba;
-destination.textContent = rgba;
-
-return rgba;
-}
-
-avyGridTop = [];
-
-topArray.forEach(pickArray);
-
-
 
 function pickArray(event) {
   var x = event.x;
   var y = event.y;
+
+  console.log(ctx);
   var pixel = ctx.getImageData(x, y, 1, 1);
-  console.log(x);
-  console.log(y);
   var data = pixel.data;
-  console.log(data);
+  var r = data[0];
+  var g = data[1];
+  var b = data[2];
 
-  const rgba = [data[0], data[1], data[2]];
-// const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
-    //const comboText = "X: " + x + ", Y: " + y + ", " + "rgb: " + rgba;
-    const comboText = rgba;
-    console.log(comboText);
-//destination.style.background = rgba;
-//destination.textContent = rgba;
-    avyGridTop.push(comboText);
-return rgba;
+  var rgba = data[0] + ", " + data[1] + ", " + data[2];
+  //avyGridTop.push([data[0], data[1], data[2]]);
+console.log(rgba);
+    avyGridTop.push(rgba)
+
+};
+
+console.log(avyGridTop[1]);
+console.log(avyGridTop);
+
 }
-
-    console.log(avyGridTop);
-});
-   
-
-
+const task2 = ()=>{
+console.log(avyGridTop[1]);
 var rendererTop = {
           type: "unique-value", // autocasts as new UniqueValueRenderer()
           field: "gridcode",
@@ -144,7 +109,7 @@ var rendererTop = {
               value: "0",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "blue"
+                color: avyGridTop[0]
               }
             },
             {
@@ -152,7 +117,7 @@ var rendererTop = {
               value: "1",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "green"
+                color: avyGridTop[1]
               }
             },
             {
@@ -160,27 +125,31 @@ var rendererTop = {
               value: "2",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "green"
+                color: avyGridTop[2]
               }
             },
             {
-              // All features with value of "South" will be red
+              // All features with value of "Southeast" will be red
+              value: "3",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[3]
+              }
+            },
+            {
+              // All features with value of "South" will be yellow
               value: "4",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "red"
-              }
-            },
-            {
-              // All features with value of "West" will be yellow
-              value: "6",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "yellow"
+                color: avyGridTop[4]
               }
             }
           ]
         };
+        console.log(avyGridTop[0]);
+        console.log(avyGridTop);
+
+        console.log(rendererTop);
 
         const geojsonLayer = new GeoJSONLayer({
           url: url,
@@ -190,14 +159,15 @@ var rendererTop = {
         });
 
         map.add(geojsonLayer);
+}
+async function asyncCall(){
+  await task1(); 
+  task2();
+};
+console.log(avyGridTop[1]);
+asyncCall();
 
-
-
-
-
-
-
-      });
+});
     </script>
   </head>
 
@@ -207,8 +177,6 @@ var rendererTop = {
             <thead>
                 <tr>
                     <th>Source</th>
-                    <th width="150">Hovered color</th>
-                    <th width="150">Selected color</th>
                 </tr>
             </thead>
             <tbody>
