@@ -71,7 +71,6 @@ var ctx = canvas.getContext('2d');
 img.onload = function() {
   ctx.drawImage(img, 0, 0);
   img.style.display = 'none';
-  console.log("img loaded");
     topArray.forEach(pickArray);
 };
 
@@ -79,26 +78,23 @@ function pickArray(event) {
   var x = event.x;
   var y = event.y;
 
-  console.log(ctx);
   var pixel = ctx.getImageData(x, y, 1, 1);
   var data = pixel.data;
   var r = data[0];
   var g = data[1];
   var b = data[2];
 
-  var rgba = data[0] + ", " + data[1] + ", " + data[2];
-  //avyGridTop.push([data[0], data[1], data[2]]);
-console.log(rgba);
-    avyGridTop.push(rgba)
-
+  var rgb = {r, g, b};
+  console.log(rgb);
+    avyGridTop.push(rgb);
 };
 
-console.log(avyGridTop[1]);
-console.log(avyGridTop);
+
+
 
 }
 const task2 = ()=>{
-console.log(avyGridTop[1]);
+
 var rendererTop = {
           type: "unique-value", // autocasts as new UniqueValueRenderer()
           field: "gridcode",
@@ -164,7 +160,7 @@ async function asyncCall(){
   await task1(); 
   task2();
 };
-console.log(avyGridTop[1]);
+
 asyncCall();
 
 });
