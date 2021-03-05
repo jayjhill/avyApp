@@ -26,7 +26,7 @@ color: white;
     <script src="https://js.arcgis.com/4.18/"></script>
 
     <script>
-      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Locate"], function(Map, SceneView, SceneLayer, GeoJSONLayer, Locate) {
+      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Expand", "esri/widgets/Locate", "esri/widgets/BasemapToggle"], function(Map, SceneView, SceneLayer, GeoJSONLayer, Expand, Locate, BasemapToggle) {
 
         avyGridTop = [];
 
@@ -34,7 +34,7 @@ color: white;
 
         // Create Map
  var map = new Map({
-          basemap: "topo-vector",
+          basemap: "streets-relief-vector",
           ground: "world-elevation"
         });
 
@@ -49,14 +49,20 @@ color: white;
           }
         });
 //widgets
+var basemapToggle = new BasemapToggle({
+  view: view,  
+  nextBasemap: "satellite"
+});
+
 var locateBtn = new Locate({
           view: view
         });
-
-        // Add the locate widget to the top left corner of the view
         view.ui.add(locateBtn, {
           position: "top-left"
         });
+        view.ui.add(basemapToggle, "top-right");
+
+
 
 //arrays with x,y data specific to the rose png
 var topArray = [
@@ -108,7 +114,6 @@ img.src = 'https://mountainlabmaps.com/images/avy' + yyyymmdd() + '.png';
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 img.onload = function() {
-    console.log("image loaded");
   ctx.drawImage(img, 0, 0);
   img.style.display = 'none';
     topArray.forEach(pickArray);
@@ -123,7 +128,6 @@ img.onload = function() {
   var b = data[2];
 
   var rgb = {r, g, b};
-  console.log("pushing");
   avyGridTop.push(rgb);
 
 };
@@ -137,7 +141,11 @@ var rendererTop = {
               value: "0",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[0]
+                color: avyGridTop[0],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -145,7 +153,11 @@ var rendererTop = {
               value: "1",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[1]
+                color: avyGridTop[1],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -153,7 +165,11 @@ var rendererTop = {
               value: "2",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[2]
+                color: avyGridTop[2],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -161,7 +177,11 @@ var rendererTop = {
               value: "3",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[3]
+                color: avyGridTop[3],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -169,7 +189,11 @@ var rendererTop = {
               value: "4",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[4]
+                color: avyGridTop[4],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -177,7 +201,11 @@ var rendererTop = {
               value: "5",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[5]
+                color: avyGridTop[5],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -185,7 +213,11 @@ var rendererTop = {
               value: "6",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[6]
+                color: avyGridTop[6],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
             {
@@ -193,19 +225,22 @@ var rendererTop = {
               value: "7",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[7]
+                color: avyGridTop[7],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
               }
             },
           ]
         };
-        console.log(avyGridTop[0]);
-        console.log(avyGridTop);
+
 
         console.log(rendererTop);
 
         const geojsonLayer = new GeoJSONLayer({
           url: url,
-          opacity: 0.75,
+          opacity: 0.5,
           copyright: "Mountainlabmaps.com",
           renderer: rendererTop 
         });
