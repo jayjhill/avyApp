@@ -13,6 +13,9 @@
         height: 100%;
         width: 100%;
       }
+      .esri-view-user-storage {
+          display: none;
+      }
 .color-cell {
 color: white;
 }
@@ -23,7 +26,7 @@ color: white;
     <script src="https://js.arcgis.com/4.18/"></script>
 
     <script>
-      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer"], function(Map, SceneView, SceneLayer, GeoJSONLayer) {
+      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Locate"], function(Map, SceneView, SceneLayer, GeoJSONLayer, Locate) {
 
         avyGridTop = [];
 
@@ -45,9 +48,17 @@ color: white;
             heading: 0
           }
         });
+//widgets
+var locateBtn = new Locate({
+          view: view
+        });
 
-const task1 = ()=>{
+        // Add the locate widget to the top left corner of the view
+        view.ui.add(locateBtn, {
+          position: "top-left"
+        });
 
+//arrays with x,y data specific to the rose png
 var topArray = [
     {x: 198, y: 132},
     {x: 219, y: 138},
@@ -58,23 +69,50 @@ var topArray = [
     {x: 163, y: 156},
     {x: 178, y: 138},
 ];
+var midArray = [
+   {X: 204, Y: 104},
+   {X: 254, Y: 120},
+   {X: 277, Y: 163},
+   {X: 252, Y: 213},
+   {X: 195, Y: 229},
+   {X: 149, Y: 208},
+   {X: 128, Y: 165},
+   {X: 149, Y: 122}
+]
+var bottomArray = [
+   {X: 200, Y: 131},
+   {X: 223, Y: 137},
+   {X: 231, Y: 156},
+   {X: 221, Y: 177},
+   {X: 201, Y: 186},
+   {X: 176, Y: 178},
+   {X: 168, Y: 158},
+   {X: 177, Y: 138}
+]
 
-
-
+function yyyymmdd() {
+    var now = new Date();
+    var y = now.getFullYear();
+    var m = now.getMonth() + 1;
+    var d = now.getDate();
+    var mm = m < 10 ? '0' + m : m;
+    var dd = d < 10 ? '0' + d : d;
+    return '' + y + mm + dd;
+}
 
 
 
 var img = new Image();
-img.src = 'https://mountainlabmaps.com/images/avy20210303.png';
+
+img.src = 'https://mountainlabmaps.com/images/avy' + yyyymmdd() + '.png';
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 img.onload = function() {
+    console.log("image loaded");
   ctx.drawImage(img, 0, 0);
   img.style.display = 'none';
     topArray.forEach(pickArray);
-};
-
-function pickArray(event) {
+    function pickArray(event) {
   var x = event.x;
   var y = event.y;
 
@@ -85,16 +123,10 @@ function pickArray(event) {
   var b = data[2];
 
   var rgb = {r, g, b};
-  console.log(rgb);
-    avyGridTop.push(rgb);
+  console.log("pushing");
+  avyGridTop.push(rgb);
+
 };
-
-
-
-
-}
-const task2 = ()=>{
-
 var rendererTop = {
           type: "unique-value", // autocasts as new UniqueValueRenderer()
           field: "gridcode",
@@ -139,7 +171,31 @@ var rendererTop = {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
                 color: avyGridTop[4]
               }
-            }
+            },
+            {
+              // All features with value of "Southwest" will be red
+              value: "5",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[5]
+              }
+            },
+            {
+              // All features with value of "West" will be red
+              value: "6",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[6]
+              }
+            },
+            {
+              // All features with value of "Southeast" will be red
+              value: "7",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[7]
+              }
+            },
           ]
         };
         console.log(avyGridTop[0]);
@@ -155,13 +211,18 @@ var rendererTop = {
         });
 
         map.add(geojsonLayer);
-}
-async function asyncCall(){
-  await task1(); 
-  task2();
 };
 
-asyncCall();
+
+
+
+
+
+
+
+
+
+
 
 });
     </script>
@@ -170,15 +231,10 @@ asyncCall();
   <body>
     <div id="viewDiv">
         <table>
-            <thead>
-                <tr>
-                    <th>Source</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
                     <td>
-                        <canvas id="canvas" width="400" height="400"></canvas>
+                        <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
                     </td>
                     <td align="center" class="color-cell" id="hovered-color"></td>
                     <td align="center" class="color-cell" id="selected-color"></td>
