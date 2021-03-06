@@ -76,27 +76,43 @@ var topArray = [
     {x: 177, y: 176},
     {x: 163, y: 156},
     {x: 178, y: 138},
+    {x: 204, y: 104},
+   {x: 254, y: 120},
+   {x: 277, y: 163},
+   {x: 252, y: 213},
+   {x: 195, y: 229},
+   {x: 149, y: 208},
+   {x: 128, y: 165},
+   {x: 149, y: 122},
+   {x: 200, y: 131},
+   {x: 223, y: 137},
+   {x: 231, y: 156},
+   {x: 221, y: 177},
+   {x: 201, y: 186},
+   {x: 176, y: 178},
+   {x: 168, y: 158},
+   {x: 177, y: 138}
 ];
-var midArray = [
-   {X: 204, Y: 104},
-   {X: 254, Y: 120},
-   {X: 277, Y: 163},
-   {X: 252, Y: 213},
-   {X: 195, Y: 229},
-   {X: 149, Y: 208},
-   {X: 128, Y: 165},
-   {X: 149, Y: 122}
-]
-var bottomArray = [
-   {X: 200, Y: 131},
-   {X: 223, Y: 137},
-   {X: 231, Y: 156},
-   {X: 221, Y: 177},
-   {X: 201, Y: 186},
-   {X: 176, Y: 178},
-   {X: 168, Y: 158},
-   {X: 177, Y: 138}
-]
+// var midArray = [
+//    {X: 204, Y: 104},
+//    {X: 254, Y: 120},
+//    {X: 277, Y: 163},
+//    {X: 252, Y: 213},
+//    {X: 195, Y: 229},
+//    {X: 149, Y: 208},
+//    {X: 128, Y: 165},
+//    {X: 149, Y: 122}
+// ]
+// var bottomArray = [
+//    {X: 200, Y: 131},
+//    {X: 223, Y: 137},
+//    {X: 231, Y: 156},
+//    {X: 221, Y: 177},
+//    {X: 201, Y: 186},
+//    {X: 176, Y: 178},
+//    {X: 168, Y: 158},
+//    {X: 177, Y: 138}
+// ]
 
 function yyyymmdd() {
     var now = new Date();
@@ -113,6 +129,7 @@ function yyyymmdd() {
 var img = new Image();
 
 img.src = 'https://mountainlabmaps.com/images/avy' + yyyymmdd() + '.png';
+console.log(img.src);
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 img.onload = function() {
@@ -133,6 +150,7 @@ img.onload = function() {
   avyGridTop.push(rgb);
 
 };
+
 var rendererTop = {
           type: "unique-value", // autocasts as new UniqueValueRenderer()
           field: "gridcode",
@@ -237,7 +255,7 @@ var rendererTop = {
           ]
         };
 
-//renderer for mid
+//renderer for mid --------------------------------------------------------------------------
 var rendererMid = {
           type: "unique-value", // autocasts as new UniqueValueRenderer()
           field: "gridcode",
@@ -248,7 +266,7 @@ var rendererMid = {
               value: "0",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[0],
+                color: avyGridTop[8],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -260,7 +278,7 @@ var rendererMid = {
               value: "1",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[1],
+                color: avyGridTop[9],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -272,7 +290,7 @@ var rendererMid = {
               value: "2",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[2],
+                color: avyGridTop[10],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -284,7 +302,7 @@ var rendererMid = {
               value: "3",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[3],
+                color: avyGridTop[11],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -296,7 +314,7 @@ var rendererMid = {
               value: "4",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[4],
+                color: avyGridTop[12],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -308,7 +326,7 @@ var rendererMid = {
               value: "5",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[5],
+                color: avyGridTop[13],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -320,7 +338,7 @@ var rendererMid = {
               value: "6",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[6],
+                color: avyGridTop[14],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -332,7 +350,112 @@ var rendererMid = {
               value: "7",
               symbol: {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridMid[7],
+                color: avyGridTop[15],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+          ]
+        };
+
+//renderer for lower --------------------------------------------------------------------
+var rendererLower = {
+          type: "unique-value", // autocasts as new UniqueValueRenderer()
+          field: "gridcode",
+          defaultSymbol: { type: "simple-fill" }, // autocasts as new SimpleFillSymbol()
+          uniqueValueInfos: [
+            {
+              // All features with value of "North" will be blue
+              value: "0",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[16],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "NorthEast" will be green
+              value: "1",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[17],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "East" will be green
+              value: "2",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[18],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "Southeast" will be red
+              value: "3",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[19],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "South" will be yellow
+              value: "4",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[20],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "Southwest" will be red
+              value: "5",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[21],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "West" will be red
+              value: "6",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[22],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "Southeast" will be red
+              value: "7",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridTop[23],
                 outline: {  // autocasts as new SimpleLineSymbol()
     color: "white",
     width: 0
@@ -344,7 +467,6 @@ var rendererMid = {
 
 
 
-
         const upperElevations = new GeoJSONLayer({
           url: url,
           opacity: 0.5,
@@ -353,14 +475,14 @@ var rendererMid = {
         });
 
         const midElevations = new GeoJSONLayer({
-          url: url,
+          url: "http://mountainlabmaps.com/avy/json/SLC_8000to9500.geojson",
           opacity: 0.5,
           copyright: "Mountainlabmaps.com",
           renderer: rendererMid
         });
 
         const lowerElevations = new GeoJSONLayer({
-          url: url,
+          url: "http://mountainlabmaps.com/avy/json/SLC_LessThan8000.geojson",
           opacity: 0.5,
           copyright: "Mountainlabmaps.com",
           renderer: rendererLower
@@ -368,7 +490,7 @@ var rendererMid = {
 
         map.add(upperElevations);
         map.add(midElevations);
-        map.add(lowerElevations);
+        //map.add(lowerElevations);
 };
 
 
