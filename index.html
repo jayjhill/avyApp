@@ -29,6 +29,8 @@ color: white;
       require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Expand", "esri/widgets/Locate", "esri/widgets/BasemapToggle"], function(Map, SceneView, SceneLayer, GeoJSONLayer, Expand, Locate, BasemapToggle) {
 
         avyGridTop = [];
+        avyGridMid = [];
+        avyGridBottom = [];
 
         url = "http://mountainlabmaps.com/avy/json/SLC_GreaterThan9500.geojson";
 
@@ -235,17 +237,138 @@ var rendererTop = {
           ]
         };
 
+//renderer for mid
+var rendererMid = {
+          type: "unique-value", // autocasts as new UniqueValueRenderer()
+          field: "gridcode",
+          defaultSymbol: { type: "simple-fill" }, // autocasts as new SimpleFillSymbol()
+          uniqueValueInfos: [
+            {
+              // All features with value of "North" will be blue
+              value: "0",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[0],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "NorthEast" will be green
+              value: "1",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[1],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "East" will be green
+              value: "2",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[2],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "Southeast" will be red
+              value: "3",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[3],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "South" will be yellow
+              value: "4",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[4],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "Southwest" will be red
+              value: "5",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[5],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "West" will be red
+              value: "6",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[6],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+            {
+              // All features with value of "Southeast" will be red
+              value: "7",
+              symbol: {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: avyGridMid[7],
+                outline: {  // autocasts as new SimpleLineSymbol()
+    color: "white",
+    width: 0
+  }
+              }
+            },
+          ]
+        };
 
-        console.log(rendererTop);
 
-        const geojsonLayer = new GeoJSONLayer({
+
+
+        const upperElevations = new GeoJSONLayer({
           url: url,
           opacity: 0.5,
           copyright: "Mountainlabmaps.com",
           renderer: rendererTop 
         });
 
-        map.add(geojsonLayer);
+        const midElevations = new GeoJSONLayer({
+          url: url,
+          opacity: 0.5,
+          copyright: "Mountainlabmaps.com",
+          renderer: rendererMid
+        });
+
+        const lowerElevations = new GeoJSONLayer({
+          url: url,
+          opacity: 0.5,
+          copyright: "Mountainlabmaps.com",
+          renderer: rendererLower
+        });
+
+        map.add(upperElevations);
+        map.add(midElevations);
+        map.add(lowerElevations);
 };
 
 
