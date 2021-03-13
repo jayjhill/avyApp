@@ -1,73 +1,69 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>Avalanche Aspect App</title>
+    <meta charset='utf-8' />
+    <title>Salt Lake City Avalanche Forecast Visualized</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
     <style>
-      html,
-      body,
-      #viewDiv {
-        padding: 0;
+      body {
         margin: 0;
-        height: 100%;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
         width: 100%;
       }
-      .esri-view-user-storage {
-          display: none;
-      }
-.color-cell {
-color: white;
+
+      .legend {
+background-color: rgba(255, 255, 255, 0.7);
+bottom: 30px;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+padding: 10px;
+position: absolute;
+right: 10px;
+z-index: 1;
 }
-
+ 
+.legend h4 {
+margin: 0 0 10px;
+}
+ 
+.legend div span {
+border-radius: 50%;
+display: inline-block;
+height: 10px;
+margin-right: 5px;
+width: 10px;
+}
     </style>
+  </head>
+  <body>
 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
-    <script src="https://js.arcgis.com/4.18/"></script>
+  <div id='map'>
+                        <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
+</div>
+<div id="map-legend" class="legend">
+    <h4>Avalanche Danger</h4>
+    <div><span style="background-color: #222222"></span>Extreme</div>
+    <div><span style="background-color: #CC332C"></span>High</div>
+    <div><span style="background-color: #FF9100"></span>Considerable</div>
+    <div><span style="background-color: #FCFC00"></span>Moderate</div>
+    <div><span style="background-color: #00C346;"></span>Low</div>
+    </div>
 
-    <script>
-      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/VectorTileLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Expand", "esri/widgets/Locate", "esri/widgets/BasemapToggle"], 
-      function(Map, SceneView, SceneLayer, VectorTileLayer, GeoJSONLayer, Expand, Locate, BasemapToggle) {
-
-        avyGridTop = [];
+<script>
+            avyGridTop = [];
         avyGridMid = [];
         avyGridBottom = [];
-
-        url = "http://mountainlabmaps.com/avy/json/SLC_GreaterThan9500.geojson";
-
-        // Create Map
- var map = new Map({
-          basemap: "streets-relief-vector",
-          ground: "world-elevation"
-        });
-
-        // Create the SceneView
-        var view = new SceneView({
-          container: "viewDiv",
-          map: map,
-          camera: {
-            position: [-111.70, 40.313, 30700],
-            tilt: 51,
-            heading: 0
-          }
-        });
-//widgets
-var basemapToggle = new BasemapToggle({
-  view: view,  
-  nextBasemap: "satellite"
-});
-
-var locateBtn = new Locate({
-          view: view
-        });
-        view.ui.add(locateBtn, {
-          position: "top-left"
-        });
-        view.ui.add(basemapToggle, "top-right");
-
-
-
-//arrays with x,y data specific to the rose png
+        
+        
+        //arrays with x,y data specific to the rose png
 var topArray = [
     {x: 198, y: 132},
     {x: 219, y: 138},
@@ -128,379 +124,166 @@ img.onload = function() {
   var g = data[1];
   var b = data[2];
 
-  var rgb = {r, g, b};
+  //var rgb = {r, g, b};
+  var rgb = 'rgb(' + r + ', ' + g + ', ' + b + ')';
   avyGridTop.push(rgb);
 
-};
-
-var rendererTop = {
-          type: "unique-value", // autocasts as new UniqueValueRenderer()
-          field: "gridcode",
-          defaultSymbol: { type: "simple-fill" }, // autocasts as new SimpleFillSymbol()
-          uniqueValueInfos: [
-            {
-              // All features with value of "North" will be blue
-              value: "0",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[0],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "NorthEast" will be green
-              value: "1",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[1],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "East" will be green
-              value: "2",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[2],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southeast" will be red
-              value: "3",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[3],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "South" will be yellow
-              value: "4",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[4],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southwest" will be red
-              value: "5",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[5],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "West" will be red
-              value: "6",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[6],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southeast" will be red
-              value: "7",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[7],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-          ]
-        };
-
-//renderer for mid --------------------------------------------------------------------------
-var rendererMid = {
-          type: "unique-value", // autocasts as new UniqueValueRenderer()
-          field: "gridcode",
-          defaultSymbol: { type: "simple-fill" }, // autocasts as new SimpleFillSymbol()
-          uniqueValueInfos: [
-            {
-              // All features with value of "North" will be blue
-              value: "0",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[8],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "NorthEast" will be green
-              value: "1",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[9],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "East" will be green
-              value: "2",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[10],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southeast" will be red
-              value: "3",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[11],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "South" will be yellow
-              value: "4",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[12],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southwest" will be red
-              value: "5",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[13],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "West" will be red
-              value: "6",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[14],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southeast" will be red
-              value: "7",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[15],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-          ]
-        };
-
-//renderer for lower --------------------------------------------------------------------
-var rendererLower = {
-          type: "unique-value", // autocasts as new UniqueValueRenderer()
-          field: "gridcode",
-          defaultSymbol: { type: "simple-fill" }, // autocasts as new SimpleFillSymbol()
-          uniqueValueInfos: [
-            {
-              // All features with value of "North" will be blue
-              value: "0",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[16],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "NorthEast" will be green
-              value: "1",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[17],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "East" will be green
-              value: "2",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[18],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southeast" will be red
-              value: "3",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[19],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "South" will be yellow
-              value: "4",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[20],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southwest" will be red
-              value: "5",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[21],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "West" will be red
-              value: "6",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[22],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-            {
-              // All features with value of "Southeast" will be red
-              value: "7",
-              symbol: {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: avyGridTop[23],
-                outline: {  // autocasts as new SimpleLineSymbol()
-    color: "white",
-    width: 0
-  }
-              }
-            },
-          ]
-        };
-
-
-
-        const upperElevations = new GeoJSONLayer({
-          url: url,
-          opacity: 0.5,
-          copyright: "Mountainlabmaps.com",
-          renderer: rendererTop 
-        });
-
-        const midElevations = new GeoJSONLayer({
-          url: "http://mountainlabmaps.com/avy/json/SLC_8000to9500.geojson",
-          opacity: 0.5,
-          copyright: "Mountainlabmaps.com",
-          renderer: rendererMid
-        });
-
-        const lowerElevations = new GeoJSONLayer({
-          url: "http://mountainlabmaps.com/avy/json/SLC_LessThan8000.geojson",
-          opacity: 0.5,
-          copyright: "Mountainlabmaps.com",
-          renderer: rendererLower
-        });
-
-        map.add(upperElevations);
-        map.add(midElevations);
-        //map.add(lowerElevations);
-
 }
+}
+  
+  
+  mapboxgl.accessToken = 'pk.eyJ1IjoiamNoaWxsIiwiYSI6ImNrZGl0cGlpbzA4ZmEzMm8wZHdkYmJiNDMifQ.C941o-cDXISu58gsmm8sIw';
+  var map = new mapboxgl.Map({
+    container: 'map', // container id
+   style: 'mapbox://styles/mapbox-map-design/ckhqrf2tz0dt119ny6azh975y', // stylesheet location
+    center: [-111.651, 40.621], // starting position [lng, lat]
+    zoom: 12, // starting zoom
+    pitch: 50,
+bearing: 0,
+  });
 
+  map.addControl(
+new mapboxgl.GeolocateControl({
+positionOptions: {
+enableHighAccuracy: true
+},
+trackUserLocation: true
+})
+  )
 
-
-
-
-
-
+  map.on('load', function() {
+  
+  map.addSource('mapbox-dem', {
+'type': 'raster-dem',
+'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+'tileSize': 512,
+'maxzoom': 14
 });
-    </script>
-  </head>
+// add the DEM source as a terrain layer with exaggerated height
+map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1 });
 
-  <body>
-    <div id="viewDiv">
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
-                    </td>
-                    <td align="center" class="color-cell" id="hovered-color"></td>
-                    <td align="center" class="color-cell" id="selected-color"></td>
-                </tr>
-            </tbody>
-        <table>
-       
-     
-    </canvas></div>
-  </body>
+console.log(avyGridTop);
+ 
+// add a sky layer that will show when the map is highly pitched
+map.addLayer({
+'id': 'sky',
+'type': 'sky',
+'paint': {
+'sky-type': 'atmosphere',
+'sky-atmosphere-sun': [0.0, 0.0],
+'sky-atmosphere-sun-intensity': 15
+}
+});
+
+var colorOne = 'rgb(255,0,0)';
+  
+    map.addLayer({
+      id: 'SLC_LessThan8000',
+      type: 'fill',
+      source: {
+        type: 'vector',
+        url: 'mapbox://jchill.a3iffyuy'
+      },
+      'source-layer': 'SLC_LessThan8000',
+      'paint': {
+'fill-color': [
+'match',
+['get', 'gridcode'],
+'0',
+avyGridTop[16],
+'1',
+avyGridTop[17],
+'2',
+avyGridTop[18],
+'3',
+avyGridTop[19],
+'4',
+avyGridTop[20],
+'5',
+avyGridTop[21],
+'6',
+avyGridTop[22],
+'7',
+avyGridTop[23],
+/* other */ '#ffffff'
+],
+'fill-opacity': 0.7
+}
+    });
+    
+ map.addLayer({
+      id: 'SLC_8000to9500',
+      type: 'fill',
+      source: {
+        type: 'vector',
+        url: 'mapbox://jchill.15vi4pm2'
+      },
+      'source-layer': 'SLC_8000to9500',
+      'paint': {
+'fill-color': [
+'match',
+['get', 'gridcode'],
+'0',
+avyGridTop[8],
+'1',
+avyGridTop[9],
+'2',
+avyGridTop[10],
+'3',
+avyGridTop[11],
+'4',
+avyGridTop[12],
+'5',
+avyGridTop[13],
+'6',
+avyGridTop[14],
+'7',
+avyGridTop[15],
+/* other */ '#ffffff'
+],
+'fill-opacity': 0.7
+}
+    });
+
+
+    
+ map.addLayer({
+      id: 'SLC_GreaterThan9500',
+      type: 'fill',
+      source: {
+        type: 'vector',
+        url: 'mapbox://jchill.bvz2202i'
+      },
+      'source-layer': 'SLC_GreaterThan9500',
+      'paint': {
+'fill-color': [
+'match',
+['get', 'gridcode'],
+'0',
+avyGridTop[0],
+'1',
+avyGridTop[1],
+'2',
+avyGridTop[2],
+'3',
+avyGridTop[3],
+'4',
+avyGridTop[4],
+'5',
+avyGridTop[5],
+'6',
+avyGridTop[6],
+'7',
+avyGridTop[7],
+/* other */ '#ffffff'
+],
+'fill-opacity': 0.7
+}
+    });
+    
+    
+  });
+</script>
+
+    </body>
 </html>
