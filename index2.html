@@ -73,7 +73,7 @@ var topArray = [
     {x: 177, y: 176},
     {x: 163, y: 156},
     {x: 178, y: 138},
-    {x: 204, y: 104},
+  {x: 204, y: 104},
    {x: 254, y: 120},
    {x: 277, y: 163},
    {x: 252, y: 213},
@@ -81,14 +81,14 @@ var topArray = [
    {x: 149, y: 208},
    {x: 128, y: 165},
    {x: 149, y: 122},
-   {x: 200, y: 131},
-   {x: 223, y: 137},
-   {x: 231, y: 156},
-   {x: 221, y: 177},
-   {x: 201, y: 186},
-   {x: 176, y: 178},
-   {x: 168, y: 158},
-   {x: 177, y: 138}
+  {x: 200, y: 69},
+   {x: 290, y: 102},
+   {x: 327, y: 175},
+   {x: 286, y: 254},
+   {x: 197, y: 284},
+   {x: 112, y: 254},
+   {x: 76, y: 175},
+   {x: 115, y: 103}
 ];
 
 
@@ -161,6 +161,8 @@ trackUserLocation: true
 });
 // add the DEM source as a terrain layer with exaggerated height
 map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1 });
+
+console.log(avyGridTop);
  
 // add a sky layer that will show when the map is highly pitched
 map.addLayer({
@@ -188,21 +190,21 @@ var colorOne = 'rgb(255,0,0)';
 'match',
 ['get', 'gridcode'],
 '0',
-avyGridTop[0],
+avyGridTop[16],
 '1',
-avyGridTop[1],
+avyGridTop[17],
 '2',
-avyGridTop[2],
+avyGridTop[18],
 '3',
-avyGridTop[3],
+avyGridTop[19],
 '4',
-avyGridTop[4],
+avyGridTop[20],
 '5',
-avyGridTop[5],
+avyGridTop[21],
 '6',
-avyGridTop[6],
+avyGridTop[22],
 '7',
-avyGridTop[7],
+avyGridTop[23],
 /* other */ '#ffffff'
 ],
 'fill-opacity': 0.7
@@ -258,21 +260,21 @@ avyGridTop[15],
 'match',
 ['get', 'gridcode'],
 '0',
-avyGridTop[16],
+avyGridTop[0],
 '1',
-avyGridTop[17],
+avyGridTop[1],
 '2',
-avyGridTop[18],
+avyGridTop[2],
 '3',
-avyGridTop[19],
+avyGridTop[3],
 '4',
-avyGridTop[20],
+avyGridTop[4],
 '5',
-avyGridTop[21],
+avyGridTop[5],
 '6',
-avyGridTop[22],
+avyGridTop[6],
 '7',
-avyGridTop[23],
+avyGridTop[7],
 /* other */ '#ffffff'
 ],
 'fill-opacity': 0.7
