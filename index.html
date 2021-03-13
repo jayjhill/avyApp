@@ -26,7 +26,8 @@ color: white;
     <script src="https://js.arcgis.com/4.18/"></script>
 
     <script>
-      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Expand", "esri/widgets/Locate", "esri/widgets/BasemapToggle"], function(Map, SceneView, SceneLayer, GeoJSONLayer, Expand, Locate, BasemapToggle) {
+      require(["esri/Map", "esri/views/SceneView", "esri/layers/SceneLayer", "esri/layers/VectorTileLayer", "esri/layers/GeoJSONLayer", "esri/widgets/Expand", "esri/widgets/Locate", "esri/widgets/BasemapToggle"], 
+      function(Map, SceneView, SceneLayer, VectorTileLayer, GeoJSONLayer, Expand, Locate, BasemapToggle) {
 
         avyGridTop = [];
         avyGridMid = [];
@@ -93,26 +94,7 @@ var topArray = [
    {x: 168, y: 158},
    {x: 177, y: 138}
 ];
-// var midArray = [
-//    {X: 204, Y: 104},
-//    {X: 254, Y: 120},
-//    {X: 277, Y: 163},
-//    {X: 252, Y: 213},
-//    {X: 195, Y: 229},
-//    {X: 149, Y: 208},
-//    {X: 128, Y: 165},
-//    {X: 149, Y: 122}
-// ]
-// var bottomArray = [
-//    {X: 200, Y: 131},
-//    {X: 223, Y: 137},
-//    {X: 231, Y: 156},
-//    {X: 221, Y: 177},
-//    {X: 201, Y: 186},
-//    {X: 176, Y: 178},
-//    {X: 168, Y: 158},
-//    {X: 177, Y: 138}
-// ]
+
 
 function yyyymmdd() {
     var now = new Date();
@@ -491,12 +473,8 @@ var rendererLower = {
         map.add(upperElevations);
         map.add(midElevations);
         //map.add(lowerElevations);
-};
 
-
-
-
-
+}
 
 
 
