@@ -73,7 +73,19 @@ width: 10px;
             avyGridTop = [];
         avyGridMid = [];
         avyGridBottom = [];
-        
+
+//parse UAC JSON
+const uacURL = "https://utahavalanchecenter.org/forecast/salt-lake/json";
+function statsget() {
+   var uname = 'CertainPerformance';
+   fetch(`https://utahavalanchecenter.org/forecast/salt-lake/json`,)
+     .then(res => res.json())
+     .then(resJSON => {
+       // interact with resJSON here
+       console.log(resJSON);
+     });
+ }
+ statsget();
         
         //arrays with x,y data specific to the rose png
 var topArray = [
