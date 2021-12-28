@@ -2,7 +2,11 @@ avyGridTop = [];
 avyGridMid = [];
 avyGridBottom = [];
 
-
+const dangerLow = "#00C346";
+const dangerMod = "#FCFC00";
+const dangerCons = "#FF9100";
+const dangerHigh = "#CC332C";
+const dangerEx = "#222222";
 
 
 
@@ -17,25 +21,34 @@ async function getAvyData() {
 }
 
 getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
-  console.log(overallDanger.length);
-  for(var i in overallDanger)
-  overallArray.push([i, overallDanger [i]]);
+  overallArray = overallDanger.split(',');
   console.log(overallArray);
+  overallArray.forEach(matchColor);
+  console.log(avyGridTop);
 });
 
+function matchColor(v) {
+  if (v == '2') {
+    newVal = dangerLow;
+    avyGridTop.push(newVal);
+  } else if (v == '4') {
+    newVal = dangerMod;
+    avyGridTop.push(newVal);
+  } else if (v == '6') {
+    newVal = dangerCons;
+    avyGridTop.push(newVal);
+  } else if (v == '8') {
+    newVal = dangerHigh;
+    avyGridTop.push(newVal);
+  } else if (v == '10') {
+    newVal = dangerEx;
+    avyGridTop.push(newVal);
+  }
+}
 
 
 
-// fetch(url)
-//   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-//   .then(data =>  { overallDanger = data.advisory.overall_danger_rose;
-//     console.log(overallDanger);
-//     for(var i in overallDanger)
-//     overallArray.push([i, overallDanger [i]]);
-  
-//   });
 
-// console.log(overallArray);
 
 
 function yyyymmdd() {
