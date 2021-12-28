@@ -3,59 +3,39 @@ avyGridMid = [];
 avyGridBottom = [];
 
 
-const fs = require('fs')
-fs.readFile('./json/' + 'avyJson' + yyyymmdd() + '.json', 'utf8', (err, jsonString) => {
-if (err) {
-console.log("File read failed:", err)
-return
-}
-try {
-const report = JSON.parse(jsonString)
-console.log("Array:", report.overall_danger_rose) // => "Customer address is: Infinity Loop Drive"
-} catch(err) {
-console.log('Error parsing JSON string:', err)
-}
-})
 
-function yyyymmdd() {
-var now = new Date();
-var y = now.getFullYear();
-var m = now.getMonth() + 1;
-var d = now.getDate();
-var mm = m < 10 ? '0' + m : m;
-var dd = d < 10 ? '0' + d : d;
-return '' + y + mm + dd;
+
+
+let overallArray = [];
+let url = 'https://mountainlabmaps.com/json/' + 'avyJson' + yyyymmdd() + '.json';
+console.log(url);
+
+async function getAvyData() {
+  const response =  await fetch(url);
+  const data = await response.json();
+  return data;
 }
 
+getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
+  console.log(overallDanger.length);
+  for(var i in overallDanger)
+  overallArray.push([i, overallDanger [i]]);
+  console.log(overallArray);
+});
 
 
-//arrays with x,y data specific to the rose png
-var topArray = [
-{x: 198, y: 132},
-{x: 219, y: 138},
-{x: 233, y: 157},
-{x: 225, y: 179},
-{x: 201, y: 187},
-{x: 177, y: 176},
-{x: 163, y: 156},
-{x: 178, y: 138},
-{x: 204, y: 104},
-{x: 254, y: 120},
-{x: 277, y: 163},
-{x: 252, y: 213},
-{x: 195, y: 229},
-{x: 149, y: 208},
-{x: 128, y: 165},
-{x: 149, y: 122},
-{x: 200, y: 69},
-{x: 290, y: 102},
-{x: 327, y: 175},
-{x: 286, y: 254},
-{x: 197, y: 284},
-{x: 112, y: 254},
-{x: 76, y: 175},
-{x: 115, y: 103}
-];
+
+
+// fetch(url)
+//   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+//   .then(data =>  { overallDanger = data.advisory.overall_danger_rose;
+//     console.log(overallDanger);
+//     for(var i in overallDanger)
+//     overallArray.push([i, overallDanger [i]]);
+  
+//   });
+
+// console.log(overallArray);
 
 
 function yyyymmdd() {
@@ -70,32 +50,73 @@ return '' + y + mm + dd;
 
 
 
-var img = new Image();
+// //arrays with x,y data specific to the rose png
+// var topArray = [
+// {x: 198, y: 132},
+// {x: 219, y: 138},
+// {x: 233, y: 157},
+// {x: 225, y: 179},
+// {x: 201, y: 187},
+// {x: 177, y: 176},
+// {x: 163, y: 156},
+// {x: 178, y: 138},
+// {x: 204, y: 104},
+// {x: 254, y: 120},
+// {x: 277, y: 163},
+// {x: 252, y: 213},
+// {x: 195, y: 229},
+// {x: 149, y: 208},
+// {x: 128, y: 165},
+// {x: 149, y: 122},
+// {x: 200, y: 69},
+// {x: 290, y: 102},
+// {x: 327, y: 175},
+// {x: 286, y: 254},
+// {x: 197, y: 284},
+// {x: 112, y: 254},
+// {x: 76, y: 175},
+// {x: 115, y: 103}
+// ];
 
-img.src = 'https://mountainlabmaps.com/images/avy' + yyyymmdd() + '.png';
-console.log(img.src);
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-img.onload = function() {
-ctx.drawImage(img, 0, 0);
-img.style.display = 'none';
-topArray.forEach(pickArray);
-function pickArray(event) {
-var x = event.x;
-var y = event.y;
 
-var pixel = ctx.getImageData(x, y, 1, 1);
-var data = pixel.data;
-var r = data[0];
-var g = data[1];
-var b = data[2];
-
-//var rgb = {r, g, b};
-var rgb = 'rgb(' + r + ', ' + g + ', ' + b + ')';
-avyGridTop.push(rgb);
-
+function yyyymmdd() {
+var now = new Date();
+var y = now.getFullYear();
+var m = now.getMonth() + 1;
+var d = now.getDate();
+var mm = m < 10 ? '0' + m : m;
+var dd = d < 10 ? '0' + d : d;
+return '' + y + mm + dd;
 }
-}
+
+
+
+// var img = new Image();
+
+// img.src = 'https://mountainlabmaps.com/images/avy' + yyyymmdd() + '.png';
+// console.log(img.src);
+// var canvas = document.getElementById('canvas');
+// var ctx = canvas.getContext('2d');
+// img.onload = function() {
+// ctx.drawImage(img, 0, 0);
+// img.style.display = 'none';
+// topArray.forEach(pickArray);
+// function pickArray(event) {
+// var x = event.x;
+// var y = event.y;
+
+// var pixel = ctx.getImageData(x, y, 1, 1);
+// var data = pixel.data;
+// var r = data[0];
+// var g = data[1];
+// var b = data[2];
+
+// //var rgb = {r, g, b};
+// var rgb = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+// avyGridTop.push(rgb);
+
+// }
+// }
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamNoaWxsIiwiYSI6ImNrZGl0cGlpbzA4ZmEzMm8wZHdkYmJiNDMifQ.C941o-cDXISu58gsmm8sIw';
@@ -128,7 +149,7 @@ map.addSource('mapbox-dem', {
 // add the DEM source as a terrain layer with exaggerated height
 map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1 });
 
-console.log(avyGridTop);
+//console.log(avyGridTop);
 
 // add a sky layer that will show when the map is highly pitched
 map.addLayer({
