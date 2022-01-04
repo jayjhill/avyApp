@@ -19,6 +19,7 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://use.fontawesome.com/5c327cf8b2.js"></script>
     <style>
       body {
         margin: 0;
@@ -105,7 +106,8 @@ height: fit-content;
     }
 
 
-    * {
+/* panel layout mechanics */
+* {
 	 box-sizing: border-box;
 }
  body .toggle {
@@ -132,6 +134,8 @@ height: fit-content;
 	 left: 0%;
 }
 
+ 
+
 
 
 
@@ -156,12 +160,18 @@ height: fit-content;
   </div>
 </div> -->
 
+
+
+
+
 <div class="pane">
-  <h2>Slideout Header</h2>
-  <div id="avyReport" class="report"></div>
+  <h2>Avalanche Forecast</h2>
+  <div id="report"></div>
 </div>
-<button class="toggle">Toggle
+<button class="toggle">Forecast
 </button>
+
+
 
 <div class="map-overlay top">
   <div class="map-overlay-inner">
