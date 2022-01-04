@@ -28,7 +28,7 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   avyReportClean = avyReport.replace(/&nbsp;/g, ' ');
   console.log(avyReportClean);
   avyReportCleanNo = avyReportClean.replace(/(\r\n|\n|\r)/gm, "");
-  document.getElementById("avyReport").innerText = avyReportCleanNo;
+  document.getElementById("report").innerText = avyReportCleanNo;
 });
 
 function matchColor(v) {
@@ -76,6 +76,16 @@ slider.addEventListener('input', (e) => {
       'fill-opacity',
       parseInt(e.target.value, 10) / 100
   );
+  map.setPaintProperty(
+    'SLC_8000to9500',
+      'fill-opacity',
+      parseInt(e.target.value, 10) / 100
+  );
+  map.setPaintProperty(
+    'SLC_GreaterThan9500',
+      'fill-opacity',
+      parseInt(e.target.value, 10) / 100
+  );
 
   // Value indicator
   sliderValue.textContent = e.target.value + '%';
@@ -110,7 +120,7 @@ map.addSource('mapbox-dem', {
 'maxzoom': 14
 });
 // add the DEM source as a terrain layer with exaggerated height
-map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1 });
+map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.2 });
 
 //console.log(avyGridTop);
 
@@ -157,7 +167,7 @@ avyGridTop[22],
 avyGridTop[23],
 /* other */ '#ffffff'
 ],
-'fill-opacity': 0.7
+'fill-opacity': 1
 }
 });
 
@@ -191,7 +201,7 @@ avyGridTop[14],
 avyGridTop[15],
 /* other */ '#ffffff'
 ],
-'fill-opacity': 0.7
+'fill-opacity': 1
 }
 });
 
@@ -227,16 +237,11 @@ avyGridTop[6],
 avyGridTop[7],
 /* other */ '#ffffff'
 ],
-'fill-opacity': 0.7
+'fill-opacity': 1
 }
 });
 
-const button = document.querySelector('.toggle');
-const pane = document.querySelector('.pane');
 
-button.addEventListener('click', () => {
-  pane.classList.toggle('open');
-});
 
 
 });

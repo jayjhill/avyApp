@@ -106,32 +106,63 @@ height: fit-content;
     }
 
 
-/* panel layout mechanics */
-* {
-	 box-sizing: border-box;
+
+/* Slideout outer button */
+#slideout {
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 40px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
 }
- body .toggle {
-	 position: absolute;
-	 right: 1rem;
-	 top: 6rem;
-	 padding: 0.5rem 1rem;
-	 background: #212121;
-	 color: white;
-	 font-size: 1.2rem;
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout_inner {
+position: fixed;
+top: 40px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
 }
- body .pane {
-	 position: fixed;
-	 top: 0;
-	 left: -30%;
-	 padding: 1rem 2rem;
-	 height: 100vh;
-	 width: 30%;
-	 background: white;
-	 box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-	 transition: 0.5s all ease;
+/* Hover alignment */
+#slideout:hover {
+left: 300px;
 }
- body .pane.open {
-	 left: 0%;
+#slideout:hover #slideout_inner {
+left: 0;
 }
 
  
@@ -147,29 +178,23 @@ height: fit-content;
   <div id='map'>
                         <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
 </div>
-<!-- <div id="avyReport" class="report">
+
+
+
+<div id="slideout">
+  <div class="faArrowIcon">Forecast</div>
   
-</div> -->
-
-  
-
-<!-- <div id="slideout">
-  <img src="forecast.png" alt="Forecast" />
-  <div id="avyReport">
-
+    
+  <div id="slideout_inner">
+  <div>
+    <h2>Avalanche Forecast</h2>
+    <div id="report"></div>
   </div>
-</div> -->
+  </div>
+  </div>
 
 
 
-
-
-<div class="pane">
-  <h2>Avalanche Forecast</h2>
-  <div id="report"></div>
-</div>
-<button class="toggle">Forecast
-</button>
 
 
 
