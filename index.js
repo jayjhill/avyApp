@@ -8,7 +8,8 @@ const dangerCons = "#FF9100";
 const dangerHigh = "#CC332C";
 const dangerEx = "#222222";
 
-
+const slider = document.getElementById('slider');
+const sliderValue = document.getElementById('slider-value');
 
 let overallArray = [];
 let url = 'https://mountainlabmaps.com/json/' + 'avyJson' + yyyymmdd() + '.json';
@@ -22,6 +23,12 @@ async function getAvyData() {
 getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   overallArray = overallDanger.split(',');
   overallArray.forEach(matchColor);
+  avyReport = data.advisory.bottom_line;
+  console.log(avyReport);
+  avyReportClean = avyReport.replace(/&nbsp;/g, ' ');
+  console.log(avyReportClean);
+  avyReportCleanNo = avyReportClean.replace(/(\r\n|\n|\r)/gm, "");
+  document.getElementById("avyReport").innerText = avyReportCleanNo;
 });
 
 function matchColor(v) {
@@ -59,6 +66,20 @@ return '' + y + mm + dd;
 }
 
 
+
+slider.addEventListener('input', (e) => {
+  // Adjust the layers opacity. layer here is arbitrary - this could
+  // be another layer name found in your style or a custom layer
+  // added on the fly using `addSource`.
+  map.setPaintProperty(
+    'SLC_LessThan8000',
+      'fill-opacity',
+      parseInt(e.target.value, 10) / 100
+  );
+
+  // Value indicator
+  sliderValue.textContent = e.target.value + '%';
+});
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamNoaWxsIiwiYSI6ImNrZGl0cGlpbzA4ZmEzMm8wZHdkYmJiNDMifQ.C941o-cDXISu58gsmm8sIw';
@@ -208,6 +229,13 @@ avyGridTop[7],
 ],
 'fill-opacity': 0.7
 }
+});
+
+const button = document.querySelector('.toggle');
+const pane = document.querySelector('.pane');
+
+button.addEventListener('click', () => {
+  pane.classList.toggle('open');
 });
 
 

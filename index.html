@@ -46,6 +46,10 @@ z-index: 1;
 .legend h4 {
 margin: 0 0 10px;
 }
+
+
+
+
  
 .legend div span {
 border-radius: 50%;
@@ -54,6 +58,84 @@ height: 10px;
 margin-right: 5px;
 width: 10px;
 }
+.report {
+background-color: rgba(255, 255, 255, 0.7);
+bottom: 30px;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+padding: 10px;
+position: absolute;
+left: 10px;
+z-index: 1;
+width: 50%;
+height: fit-content;
+}
+
+
+
+.map-overlay {
+        font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        position: absolute;
+        width: 10%;
+        top: 0;
+        right: 2%;
+        padding: 10px;
+    }
+
+    .map-overlay .map-overlay-inner {
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .map-overlay label {
+        display: block;
+        margin: 0 0 10px;
+    }
+
+    .map-overlay input {
+        background-color: transparent;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin: 0;
+        cursor: ew-resize;
+    }
+
+
+    * {
+	 box-sizing: border-box;
+}
+ body .toggle {
+	 position: absolute;
+	 right: 1rem;
+	 top: 6rem;
+	 padding: 0.5rem 1rem;
+	 background: #212121;
+	 color: white;
+	 font-size: 1.2rem;
+}
+ body .pane {
+	 position: fixed;
+	 top: 0;
+	 left: -30%;
+	 padding: 1rem 2rem;
+	 height: 100vh;
+	 width: 30%;
+	 background: white;
+	 box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+	 transition: 0.5s all ease;
+}
+ body .pane.open {
+	 left: 0%;
+}
+
+
+
+
+
     </style>
   </head>
   <body>
@@ -61,6 +143,33 @@ width: 10px;
   <div id='map'>
                         <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
 </div>
+<!-- <div id="avyReport" class="report">
+  
+</div> -->
+
+  
+
+<!-- <div id="slideout">
+  <img src="forecast.png" alt="Forecast" />
+  <div id="avyReport">
+
+  </div>
+</div> -->
+
+<div class="pane">
+  <h2>Slideout Header</h2>
+  <div id="avyReport" class="report"></div>
+</div>
+<button class="toggle">Toggle
+</button>
+
+<div class="map-overlay top">
+  <div class="map-overlay-inner">
+      <label>Layer opacity: <span id="slider-value">100%</span></label>
+      <input id="slider" type="range" min="0" max="100" step="0" value="100">
+  </div>
+</div>
+
 <div id="map-legend" class="legend">
     <h4>Avalanche Danger</h4>
     <div><span style="background-color: #222222"></span>Extreme</div>
