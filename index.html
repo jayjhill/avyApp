@@ -2,6 +2,13 @@
 <html>
 
   <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
 
       <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJJ4HLRXC8"></script>
@@ -63,7 +70,7 @@ width: 10px;
 background-color: rgba(255, 255, 255, 0.7);
 bottom: 30px;
 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+font: 10px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 padding: 10px;
 position: absolute;
 left: 10px;
@@ -72,14 +79,23 @@ width: 50%;
 height: fit-content;
 }
 
+.forecastDate {
+position: absolute;
+}
+
+.problem1Desc {
+  position: absolute;
+  font-size: 20vw;
+  height: fit-content;
+}
 
 
 .map-overlay {
         font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         position: absolute;
-        width: 10%;
-        top: 0;
-        right: 2%;
+        width: 170px;
+        top: 5%;
+        right: 1px;
         padding: 10px;
     }
 
@@ -113,7 +129,7 @@ height: fit-content;
 position: fixed;
 z-index: 1;
 width: 100px;
-top: 40px;
+top: 10px;
 left: 0;
 padding: 6px 0;
 background-color: rgba(255, 255, 255, 0.7);
@@ -145,13 +161,14 @@ border-radius: 0 5px 5px 0;
 /* Slideout inner widget area */
 #slideout_inner {
 position: fixed;
-top: 40px;
+top: 10px;
 left: -305px;
 background: #ffffff;
 opacity: 0.7;
 width: 250px;
 padding: 25px;
 height: fit-content;
+text-align: justify;
 -webkit-transition-duration: 0.3s;
 -moz-transition-duration: 0.3s;
 -o-transition-duration: 0.3s;
@@ -165,9 +182,139 @@ left: 300px;
 left: 0;
 }
 
- 
+
+/* Slideout outer button 2*/
+#slideout2 {
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 50px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
 
 
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout2_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 50px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout2:hover {
+left: 300px;
+}
+#slideout2:hover #slideout2_inner {
+left: 0;
+}      
+      #slideout:hover ~ #slideout2 {
+        display: none;
+      }      
+
+
+
+
+
+/* Slideout outer button 3*/
+#slideoutWarning {
+visibility: hidden;
+font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 175px;
+top: 0px;
+left: 40%;
+padding: 6px 0;
+background-color: rgba(255, 0, 0, 1);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 0 5px 5px;
+-moz-border-radius: 0 0 5px 5px;
+border-radius: 0 0 5px 5px;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideoutWarning_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: -350px;
+left: 40%;
+background: #ff0000;
+opacity: 1;
+width: 300px;
+padding: 25px;
+height: 300px;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideoutWarning:hover {
+top: 350px;
+}
+#slideoutWarning:hover #slideoutWarning_inner {
+top: 0;
+}      
+      /* #slideout2:hover ~ #slideoutWarning {
+        display: none;
+      }        */
 
 
 
@@ -179,7 +326,7 @@ left: 0;
                         <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
 </div>
 
-
+<!-- <div id='forecastDate'></div> -->
 
 <div id="slideout">
   <div class="faArrowIcon">Forecast</div>
@@ -187,13 +334,35 @@ left: 0;
     
   <div id="slideout_inner">
   <div>
-    <h2>Avalanche Forecast</h2>
+    <div id='forecastDate'></div>
+    <h2>Salt Lake Avalanche Forecast</h2>
     <div id="report"></div>
   </div>
   </div>
   </div>
 
 
+  <div id="slideout2">
+    <div class="faArrowIcon">Problem 1</div>
+    
+      
+    <div id="slideout2_inner">
+    <div>
+      <h2><div id="problem1"></div></h2>
+      <div id="problem1Desc"></div>
+    </div>
+    </div>
+    </div>
+
+    <div id="slideoutWarning">
+      <div class="faArrowIcon">Avalanche Warning</div>
+      
+        
+      <div id="slideoutWarning_inner">
+      <div>
+      </div>
+      </div>
+      </div>
 
 
 

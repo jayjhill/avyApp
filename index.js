@@ -17,18 +17,43 @@ let url = 'https://mountainlabmaps.com/json/' + 'avyJson' + yyyymmdd() + '.json'
 async function getAvyData() {
   const response =  await fetch(url);
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
 getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   overallArray = overallDanger.split(',');
   overallArray.forEach(matchColor);
+  avyWarning = data.advisory.avalanche_warning;
+  avyWarningClean = avyWarning.replace(/&nbsp;/g, ' ');
+  avyWarningCleanNo = avyWarningClean.replace(/(\r\n|\n|\r)/gm, "");
+  if (avyWarning){
+    console.log("avy warning");
+    document.getElementById("slideoutWarning").style.visibility = "visible";
+    const warningDiv = document.createElement("div");
+
+  // and give it some content
+  const avyWarningContent = document.createTextNode(avyWarningCleanNo);
+
+  // add the text node to the newly created div
+  warningDiv.appendChild(avyWarningContent);
+
+  // add the newly created element and its content into the DOM
+  const currentDiv = document.getElementById("slideoutWarning_inner");
+  currentDiv.insertAdjacentElement('beforeend', warningDiv);
+  }
   avyReport = data.advisory.bottom_line;
-  console.log(avyReport);
   avyReportClean = avyReport.replace(/&nbsp;/g, ' ');
-  console.log(avyReportClean);
   avyReportCleanNo = avyReportClean.replace(/(\r\n|\n|\r)/gm, "");
   document.getElementById("report").innerText = avyReportCleanNo;
+  dateIssued = data.advisory.date_issued;
+  document.getElementById("forecastDate").innerText = dateIssued;
+  problemOne = data.advisory.avalanche_problem_1;
+  problemOneDesc = data.advisory.avalanche_problem_1_description;
+  problemOneDescClean = problemOneDesc.replace(/&nbsp;/g, ' ');
+  problemOneDescCleanNo = problemOneDescClean.replace(/(\r\n|\n|\r)/gm, "");
+  document.getElementById("problem1").innerText = problemOne;
+  document.getElementById("problem1Desc").innerText = problemOneDescCleanNo;
 });
 
 function matchColor(v) {
