@@ -123,13 +123,13 @@ position: absolute;
 
 
 
-/* Slideout outer button */
+/* Slideout forecast outer button */
 #slideout {
   font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 position: fixed;
 z-index: 1;
 width: 100px;
-top: 10px;
+top: 40px;
 left: 0;
 padding: 6px 0;
 background-color: rgba(255, 255, 255, 0.7);
@@ -161,7 +161,7 @@ border-radius: 0 5px 5px 0;
 /* Slideout inner widget area */
 #slideout_inner {
 position: fixed;
-top: 10px;
+top: 40px;
 left: -305px;
 background: #ffffff;
 opacity: 0.7;
@@ -189,7 +189,7 @@ left: 0;
 position: fixed;
 z-index: 1;
 width: 100px;
-top: 50px;
+top: 75px;
 left: 0;
 padding: 6px 0;
 background-color: rgba(255, 255, 255, 0.7);
@@ -222,7 +222,7 @@ border-radius: 0 5px 5px 0;
 #slideout2_inner {
 position: fixed;
 font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-top: 50px;
+top: 75px;
 left: -305px;
 background: #ffffff;
 opacity: 0.7;
@@ -248,27 +248,167 @@ left: 0;
       }      
 
 
+/* Slideout problem 3 outer button 3*/
+#slideout3 {
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 110px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout3_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 110px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout3:hover {
+left: 300px;
+}
+#slideout3:hover #slideout3_inner {
+left: 0;
+}      
+      #slideout2:hover ~ #slideout3 {
+        display: none;
+      }    
+      
+      #slideout:hover ~ #slideout3 {
+        display: none;
+      }
+
+
+/* Slideout problem 3 outer button 4*/
+#slideout4 {
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 145px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout4_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 145px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout4:hover {
+left: 300px;
+}
+#slideout4:hover #slideout4_inner {
+left: 0;
+}      
+      #slideout2:hover ~ #slideout4 {
+        display: none;
+      }    
+      
+      #slideout:hover ~ #slideout4 {
+        display: none;
+      }
+
+      #slideout3:hover ~ #slideout4 {
+        display: none;
+      }
 
 
 
-/* Slideout outer button 3*/
+/* Slideout warning outer button */
 #slideoutWarning {
 visibility: hidden;
 font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 position: fixed;
 z-index: 1;
 width: 175px;
-top: 0px;
-left: 40%;
+top: 5px;
+left: 0;
 padding: 6px 0;
 background-color: rgba(255, 0, 0, 1);
 -webkit-transition-duration: 0.3s;
 -moz-transition-duration: 0.3s;
 -o-transition-duration: 0.3s;
 transition-duration: 0.3s;
--webkit-border-radius: 0 0 5px 5px;
--moz-border-radius: 0 0 5px 5px;
-border-radius: 0 0 5px 5px;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
 }
 
 
@@ -291,13 +431,13 @@ border-radius: 0 0 5px 5px;
 #slideoutWarning_inner {
 position: fixed;
 font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-top: -350px;
-left: 40%;
+top: 5px;
+left: -305px;
 background: #ff0000;
 opacity: 1;
-width: 300px;
+width: 250px;
 padding: 25px;
-height: 300px;
+height: fit-content;
 text-align: justify;
 line-height: 1.2;
 -webkit-transition-duration: 0.3s;
@@ -307,12 +447,12 @@ transition-duration: 0.3s;
 }
 /* Hover alignment */
 #slideoutWarning:hover {
-top: 350px;
+left: 300px;
 }
 #slideoutWarning:hover #slideoutWarning_inner {
-top: 0;
+left: 0;
 }      
-      /* #slideout2:hover ~ #slideoutWarning {
+      /* #slideout:hover ~ #slideoutWarning {
         display: none;
       }        */
 
@@ -353,6 +493,30 @@ top: 0;
     </div>
     </div>
     </div>
+
+    <div id="slideout3">
+      <div class="faArrowIcon">Problem 2</div>
+      
+        
+      <div id="slideout3_inner">
+      <div>
+        <h2><div id="problem2"></div></h2>
+        <div id="problem2Desc"></div>
+      </div>
+      </div>
+      </div>
+
+      <div id="slideout4">
+        <div class="faArrowIcon">Problem 3</div>
+        
+          
+        <div id="slideout4_inner">
+        <div>
+          <h2><div id="problem3"></div></h2>
+          <div id="problem3Desc"></div>
+        </div>
+        </div>
+        </div>
 
     <div id="slideoutWarning">
       <div class="faArrowIcon">Avalanche Warning</div>

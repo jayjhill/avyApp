@@ -24,36 +24,48 @@ async function getAvyData() {
 getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   overallArray = overallDanger.split(',');
   overallArray.forEach(matchColor);
-  avyWarning = data.advisory.avalanche_warning;
-  avyWarningClean = avyWarning.replace(/&nbsp;/g, ' ');
-  avyWarningCleanNo = avyWarningClean.replace(/(\r\n|\n|\r)/gm, "");
-  if (avyWarning){
+  //check for warning
+  if (data.advisory.avalanche_warning) {
+    avyWarning = data.advisory.avalanche_warning;
+    avyWarningClean = avyWarning.replace(/&nbsp;/g, ' ');
+    avyWarningCleanNo = avyWarningClean.replace(/(\r\n|\n|\r)/gm, "");
     console.log("avy warning");
     document.getElementById("slideoutWarning").style.visibility = "visible";
     const warningDiv = document.createElement("div");
-
-  // and give it some content
-  const avyWarningContent = document.createTextNode(avyWarningCleanNo);
-
-  // add the text node to the newly created div
-  warningDiv.appendChild(avyWarningContent);
-
-  // add the newly created element and its content into the DOM
-  const currentDiv = document.getElementById("slideoutWarning_inner");
-  currentDiv.insertAdjacentElement('beforeend', warningDiv);
+    const avyWarningContent = document.createTextNode(avyWarningCleanNo);
+    warningDiv.appendChild(avyWarningContent);
+    const currentDiv = document.getElementById("slideoutWarning_inner");
+    currentDiv.insertAdjacentElement('beforeend', warningDiv);
   }
+  //full forecast
   avyReport = data.advisory.bottom_line;
   avyReportClean = avyReport.replace(/&nbsp;/g, ' ');
   avyReportCleanNo = avyReportClean.replace(/(\r\n|\n|\r)/gm, "");
   document.getElementById("report").innerText = avyReportCleanNo;
+  //date issued
   dateIssued = data.advisory.date_issued;
   document.getElementById("forecastDate").innerText = dateIssued;
+  //problem 1
   problemOne = data.advisory.avalanche_problem_1;
   problemOneDesc = data.advisory.avalanche_problem_1_description;
   problemOneDescClean = problemOneDesc.replace(/&nbsp;/g, ' ');
   problemOneDescCleanNo = problemOneDescClean.replace(/(\r\n|\n|\r)/gm, "");
   document.getElementById("problem1").innerText = problemOne;
   document.getElementById("problem1Desc").innerText = problemOneDescCleanNo;
+  //problem 2
+  problemTwo = data.advisory.avalanche_problem_2;
+  problemTwoDesc = data.advisory.avalanche_problem_2_description;
+  problemTwoDescClean = problemTwoDesc.replace(/&nbsp;/g, ' ');
+  problemTwoDescCleanNo = problemTwoDescClean.replace(/(\r\n|\n|\r)/gm, "");
+  document.getElementById("problem2").innerText = problemTwo;
+  document.getElementById("problem2Desc").innerText = problemTwoDescCleanNo;
+    //problem 3
+    problemThree = data.advisory.avalanche_problem_3;
+    problemThreeDesc = data.advisory.avalanche_problem_3_description;
+    problemThreeDescClean = problemThreeDesc.replace(/&nbsp;/g, ' ');
+    problemThreeDescCleanNo = problemThreeDescClean.replace(/(\r\n|\n|\r)/gm, "");
+    document.getElementById("problem3").innerText = problemThree;
+    document.getElementById("problem3Desc").innerText = problemThreeDescCleanNo;
 });
 
 function matchColor(v) {
