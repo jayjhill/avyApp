@@ -7,6 +7,7 @@ const dangerMod = "#FCFC00";
 const dangerCons = "#FF9100";
 const dangerHigh = "#CC332C";
 const dangerEx = "#222222";
+const problemBlue = "#0099ff";
 
 const slider = document.getElementById('slider');
 const sliderValue = document.getElementById('slider-value');
@@ -24,6 +25,13 @@ async function getAvyData() {
 getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   overallArray = overallDanger.split(',');
   overallArray.forEach(matchColor);
+  problem1Rose = data.advisory.danger_rose_1;
+  problem2Rose = data.advisory.danger_rose_2;
+  problem3Rose = data.advisory.danger_rose_3;
+  problem1Array = problem1Rose.split(',');
+  problem2Array = problem2Rose.split(',');
+  problem3Array = problem3Rose.split(',');
+  problem1Array.forEach(problem1RoseInterp);
   //check for warning
   if (data.advisory.avalanche_warning) {
     avyWarning = data.advisory.avalanche_warning;
@@ -53,19 +61,35 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   document.getElementById("problem1").innerText = problemOne;
   document.getElementById("problem1Desc").innerText = problemOneDescCleanNo;
   //problem 2
+  if (data.advisory.avalanche_problem_2) {
   problemTwo = data.advisory.avalanche_problem_2;
   problemTwoDesc = data.advisory.avalanche_problem_2_description;
   problemTwoDescClean = problemTwoDesc.replace(/&nbsp;/g, ' ');
   problemTwoDescCleanNo = problemTwoDescClean.replace(/(\r\n|\n|\r)/gm, "");
   document.getElementById("problem2").innerText = problemTwo;
   document.getElementById("problem2Desc").innerText = problemTwoDescCleanNo;
+  document.getElementById("slideout2").style.visibility = "visible";
+    const problem2Div = document.createElement("div");
+    const problem2Content = document.createTextNode(problemTwoDescCleanNo);
+    problem2Div.appendChild(problem2Content);
+    const current2Div = document.getElementById("slideout2_inner");
+    current2Div.insertAdjacentElement('beforeend', problem2Div);
+  }
     //problem 3
+  if (data.advisory.avalanche_problem_3) {
     problemThree = data.advisory.avalanche_problem_3;
     problemThreeDesc = data.advisory.avalanche_problem_3_description;
     problemThreeDescClean = problemThreeDesc.replace(/&nbsp;/g, ' ');
     problemThreeDescCleanNo = problemThreeDescClean.replace(/(\r\n|\n|\r)/gm, "");
     document.getElementById("problem3").innerText = problemThree;
     document.getElementById("problem3Desc").innerText = problemThreeDescCleanNo;
+    document.getElementById("slideout4").style.visibility = "visible";
+    const problem3Div = document.createElement("div");
+    const problem3Content = document.createTextNode(problemThreeDescCleanNo);
+    problem3Div.appendChild(problem3Content);
+    const current3Div = document.getElementById("slideout4_inner");
+    current3Div.insertAdjacentElement('beforeend', problem3Div);
+  }
 });
 
 function matchColor(v) {
@@ -85,6 +109,13 @@ function matchColor(v) {
     newVal = dangerEx;
     avyGridTop.push(newVal);
   }
+}
+
+function problem1RoseInterp(v) {
+  if (v == '16') {
+    newVal = problemBlue;
+    problem1Array.push(newVal);
+  } 
 }
 
 
