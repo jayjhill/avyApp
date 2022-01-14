@@ -160,7 +160,7 @@ slider.addEventListener('input', (e) => {
 });
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiamNoaWxsIiwiYSI6ImNrZGl0cGlpbzA4ZmEzMm8wZHdkYmJiNDMifQ.C941o-cDXISu58gsmm8sIw';
+mapboxgl.accessToken = 'pk.eyJ1IjoiamNoaWxsIiwiYSI6ImNrbHh4aDc3MTBlbGgycG52Nmh4NWc1NW0ifQ.nq3E7MWpqV7XNmFEdmdVgQ';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 style: 'mapbox://styles/mapbox-map-design/ckhqrf2tz0dt119ny6azh975y', // stylesheet location
