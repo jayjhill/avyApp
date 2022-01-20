@@ -2,6 +2,12 @@
 <html>
 
   <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+
 
       <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJJ4HLRXC8"></script>
@@ -17,7 +23,9 @@
     <title>Salt Lake City Avalanche Forecast Visualized DEMO ONLY</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://use.fontawesome.com/5c327cf8b2.js"></script>
     <style>
       body {
         margin: 0;
@@ -45,6 +53,10 @@ z-index: 1;
 .legend h4 {
 margin: 0 0 10px;
 }
+
+
+
+
  
 .legend div span {
 border-radius: 50%;
@@ -53,6 +65,401 @@ height: 10px;
 margin-right: 5px;
 width: 10px;
 }
+.report {
+background-color: rgba(255, 255, 255, 0.7);
+bottom: 30px;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+font: 10px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+padding: 10px;
+position: absolute;
+left: 10px;
+z-index: 1;
+width: 50%;
+height: fit-content;
+}
+
+.forecastDate {
+position: absolute;
+}
+
+.problem1Desc {
+  position: absolute;
+  font-size: 20vw;
+  height: fit-content;
+}
+
+
+.map-overlay {
+        font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        position: absolute;
+        width: 170px;
+        top: 5%;
+        right: 1px;
+        padding: 10px;
+    }
+
+    .map-overlay .map-overlay-inner {
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .map-overlay label {
+        display: block;
+        margin: 0 0 10px;
+    }
+
+    .map-overlay input {
+        background-color: transparent;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin: 0;
+        cursor: ew-resize;
+    }
+
+
+
+/* Slideout forecast outer button */
+#slideout {
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 40px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout_inner {
+position: fixed;
+top: 40px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout:hover {
+left: 300px;
+}
+#slideout:hover #slideout_inner {
+left: 0;
+}
+
+
+/* Slideout outer button 2*/
+#slideout2 {
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 75px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout2_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 75px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout2:hover {
+left: 300px;
+}
+#slideout2:hover #slideout2_inner {
+left: 0;
+}      
+      #slideout:hover ~ #slideout2 {
+        display: none;
+      }      
+
+
+/* Slideout problem 3 outer button 3*/
+#slideout3 {
+  visibility: hidden;
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 110px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout3_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 110px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout3:hover {
+left: 300px;
+}
+#slideout3:hover #slideout3_inner {
+left: 0;
+}      
+      #slideout2:hover ~ #slideout3 {
+        display: none;
+      }    
+      
+      #slideout:hover ~ #slideout3 {
+        display: none;
+      }
+
+
+/* Slideout problem 3 outer button 4*/
+#slideout4 {
+  visibility: hidden;
+  font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 100px;
+top: 145px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 255, 255, 0.7);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideout4_inner {
+
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 145px;
+left: -305px;
+background: #ffffff;
+opacity: 0.7;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideout4:hover {
+left: 300px;
+}
+#slideout4:hover #slideout4_inner {
+left: 0;
+}      
+      #slideout2:hover ~ #slideout4 {
+        display: none;
+      }    
+      
+      #slideout:hover ~ #slideout4 {
+        display: none;
+      }
+
+      #slideout3:hover ~ #slideout4 {
+        display: none;
+      }
+
+
+
+/* Slideout warning outer button */
+#slideoutWarning {
+visibility: hidden;
+font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: fixed;
+z-index: 1;
+width: 175px;
+top: 5px;
+left: 0;
+padding: 6px 0;
+background-color: rgba(255, 0, 0, 1);
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-border-radius: 0 5px 5px 0;
+-moz-border-radius: 0 5px 5px 0;
+border-radius: 0 5px 5px 0;
+}
+
+
+   .faArrowIcon {
+        position:relative;
+        left:10%;
+    }
+
+    .faArrowIcon:before {
+        font-family: FontAwesome;
+        top:0;
+        left:10%;
+        padding-right:10px;
+        content: "\f2dc"; 
+
+    }
+
+
+/* Slideout inner widget area */
+#slideoutWarning_inner {
+position: fixed;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+top: 5px;
+left: -305px;
+background: #ff0000;
+opacity: 1;
+width: 250px;
+padding: 25px;
+height: fit-content;
+text-align: justify;
+line-height: 1.2;
+-webkit-transition-duration: 0.3s;
+-moz-transition-duration: 0.3s;
+-o-transition-duration: 0.3s;
+transition-duration: 0.3s;
+}
+/* Hover alignment */
+#slideoutWarning:hover {
+left: 300px;
+}
+#slideoutWarning:hover #slideoutWarning_inner {
+left: 0;
+}      
+      /* #slideout:hover ~ #slideoutWarning {
+        display: none;
+      }        */
+
+
+
     </style>
   </head>
   <body>
@@ -60,6 +467,79 @@ width: 10px;
   <div id='map'>
                         <canvas id="canvas" width="400" height="400" style= "display: none;"></canvas>
 </div>
+
+<div id='title'>Salt Lake Area Forecast Visualized</div>
+
+<div id="slideout">
+  <div class="faArrowIcon">Forecast</div>
+  
+    
+  <div id="slideout_inner">
+  <div>
+    <div id='forecastDate'></div>
+    <h2>Salt Lake Avalanche Forecast</h2>
+    <div id="report"></div>
+  </div>
+  </div>
+  </div>
+
+
+  <div id="slideout2">
+    <div class="faArrowIcon">Problem 1</div>
+    
+      
+    <div id="slideout2_inner">
+    <div>
+      <h2><div id="problem1"></div></h2>
+      <div id="problem1Desc"></div>
+    </div>
+    </div>
+    </div>
+
+    <div id="slideout3">
+      <div class="faArrowIcon">Problem 2</div>
+      
+        
+      <div id="slideout3_inner">
+      <div>
+        <h2><div id="problem2"></div></h2>
+        <div id="problem2Desc"></div>
+      </div>
+      </div>
+      </div>
+
+      <div id="slideout4">
+        <div class="faArrowIcon">Problem 3</div>
+        
+          
+        <div id="slideout4_inner">
+        <div>
+          <!-- <h2><div id="problem3"></div></h2>
+          <div id="problem3Desc"></div> -->
+        </div>
+        </div>
+        </div>
+
+    <div id="slideoutWarning">
+      <div class="faArrowIcon">Avalanche Warning</div>
+      
+        
+      <div id="slideoutWarning_inner">
+      <div>
+      </div>
+      </div>
+      </div>
+
+
+
+
+<div class="map-overlay top">
+  <div class="map-overlay-inner">
+      <label>Layer opacity: <span id="slider-value">100%</span></label>
+      <input id="slider" type="range" min="0" max="100" step="0" value="100">
+  </div>
+</div>
+
 <div id="map-legend" class="legend">
     <h4>Avalanche Danger</h4>
     <div><span style="background-color: #222222"></span>Extreme</div>
@@ -69,232 +549,8 @@ width: 10px;
     <div><span style="background-color: #00C346;"></span>Low</div>
     </div>
 
-<script>
-            avyGridTop = [];
-        avyGridMid = [];
-        avyGridBottom = [];
-        
-        
-        //arrays with x,y data specific to the rose png
-var topArray = [
-    {x: 198, y: 132},
-    {x: 219, y: 138},
-    {x: 233, y: 157},
-    {x: 225, y: 179},
-    {x: 201, y: 187},
-    {x: 177, y: 176},
-    {x: 163, y: 156},
-    {x: 178, y: 138},
-  {x: 204, y: 104},
-   {x: 254, y: 120},
-   {x: 277, y: 163},
-   {x: 252, y: 213},
-   {x: 195, y: 229},
-   {x: 149, y: 208},
-   {x: 128, y: 165},
-   {x: 149, y: 122},
-  {x: 200, y: 69},
-   {x: 290, y: 102},
-   {x: 327, y: 175},
-   {x: 286, y: 254},
-   {x: 197, y: 284},
-   {x: 112, y: 254},
-   {x: 76, y: 175},
-   {x: 115, y: 103}
-];
+<script src="index.js">
 
-
-function yyyymmdd() {
-    var now = new Date();
-    var y = now.getFullYear();
-    var m = now.getMonth() + 1;
-    var d = now.getDate();
-    var mm = m < 10 ? '0' + m : m;
-    var dd = d < 10 ? '0' + d : d;
-    return '' + y + mm + dd;
-}
-
-
-
-var img = new Image();
-
-img.src = 'https://mountainlabmaps.com/images/avy' + yyyymmdd() + '.png';
-console.log(img.src);
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-img.onload = function() {
-  ctx.drawImage(img, 0, 0);
-  img.style.display = 'none';
-    topArray.forEach(pickArray);
-    function pickArray(event) {
-  var x = event.x;
-  var y = event.y;
-
-  var pixel = ctx.getImageData(x, y, 1, 1);
-  var data = pixel.data;
-  var r = data[0];
-  var g = data[1];
-  var b = data[2];
-
-  //var rgb = {r, g, b};
-  var rgb = 'rgb(' + r + ', ' + g + ', ' + b + ')';
-  avyGridTop.push(rgb);
-
-}
-}
-  
-  
-  mapboxgl.accessToken = 'pk.eyJ1IjoiamNoaWxsIiwiYSI6ImNrZGl0cGlpbzA4ZmEzMm8wZHdkYmJiNDMifQ.C941o-cDXISu58gsmm8sIw';
-  var map = new mapboxgl.Map({
-    container: 'map', // container id
-   style: 'mapbox://styles/mapbox-map-design/ckhqrf2tz0dt119ny6azh975y', // stylesheet location
-    center: [-111.651, 40.621], // starting position [lng, lat]
-    zoom: 12, // starting zoom
-    pitch: 50,
-bearing: 0,
-  });
-
-  map.addControl(
-new mapboxgl.GeolocateControl({
-positionOptions: {
-enableHighAccuracy: true
-},
-trackUserLocation: true
-})
-  )
-
-  map.on('load', function() {
-  
-  map.addSource('mapbox-dem', {
-'type': 'raster-dem',
-'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
-'tileSize': 512,
-'maxzoom': 14
-});
-// add the DEM source as a terrain layer with exaggerated height
-map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1 });
-
-console.log(avyGridTop);
- 
-// add a sky layer that will show when the map is highly pitched
-map.addLayer({
-'id': 'sky',
-'type': 'sky',
-'paint': {
-'sky-type': 'atmosphere',
-'sky-atmosphere-sun': [0.0, 0.0],
-'sky-atmosphere-sun-intensity': 15
-}
-});
-
-var colorOne = 'rgb(255,0,0)';
-  
-    map.addLayer({
-      id: 'SLC_LessThan8000',
-      type: 'fill',
-      source: {
-        type: 'vector',
-        url: 'mapbox://jchill.a3iffyuy'
-      },
-      'source-layer': 'SLC_LessThan8000',
-      'paint': {
-'fill-color': [
-'match',
-['get', 'gridcode'],
-'0',
-avyGridTop[16],
-'1',
-avyGridTop[17],
-'2',
-avyGridTop[18],
-'3',
-avyGridTop[19],
-'4',
-avyGridTop[20],
-'5',
-avyGridTop[21],
-'6',
-avyGridTop[22],
-'7',
-avyGridTop[23],
-/* other */ '#ffffff'
-],
-'fill-opacity': 0.7
-}
-    });
-    
- map.addLayer({
-      id: 'SLC_8000to9500',
-      type: 'fill',
-      source: {
-        type: 'vector',
-        url: 'mapbox://jchill.15vi4pm2'
-      },
-      'source-layer': 'SLC_8000to9500',
-      'paint': {
-'fill-color': [
-'match',
-['get', 'gridcode'],
-'0',
-avyGridTop[8],
-'1',
-avyGridTop[9],
-'2',
-avyGridTop[10],
-'3',
-avyGridTop[11],
-'4',
-avyGridTop[12],
-'5',
-avyGridTop[13],
-'6',
-avyGridTop[14],
-'7',
-avyGridTop[15],
-/* other */ '#ffffff'
-],
-'fill-opacity': 0.7
-}
-    });
-
-
-    
- map.addLayer({
-      id: 'SLC_GreaterThan9500',
-      type: 'fill',
-      source: {
-        type: 'vector',
-        url: 'mapbox://jchill.bvz2202i'
-      },
-      'source-layer': 'SLC_GreaterThan9500',
-      'paint': {
-'fill-color': [
-'match',
-['get', 'gridcode'],
-'0',
-avyGridTop[0],
-'1',
-avyGridTop[1],
-'2',
-avyGridTop[2],
-'3',
-avyGridTop[3],
-'4',
-avyGridTop[4],
-'5',
-avyGridTop[5],
-'6',
-avyGridTop[6],
-'7',
-avyGridTop[7],
-/* other */ '#ffffff'
-],
-'fill-opacity': 0.7
-}
-    });
-    
-    
-  });
 </script>
 
     </body>
