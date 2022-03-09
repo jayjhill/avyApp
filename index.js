@@ -62,6 +62,7 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   document.getElementById("problem1Desc").innerText = problemOneDescCleanNo;
   //problem 2
   if (data.advisory.avalanche_problem_2) {
+    console.log(data.advisory.avalanche_problem_2);
   problemTwo = data.advisory.avalanche_problem_2;
   problemTwoDesc = data.advisory.avalanche_problem_2_description;
   problemTwoDescClean = problemTwoDesc.replace(/&nbsp;/g, ' ');
