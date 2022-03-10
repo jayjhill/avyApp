@@ -45,14 +45,14 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
     const currentDiv = document.getElementById("slideoutWarning_inner");
     currentDiv.insertAdjacentElement('beforeend', warningDiv);
   } else if (data.advisory.special_avalanche_bulletin) {
-    avyWarning = data.advisory.avalanche_warning;
-    avyWarningClean = avyWarning.replace(/&nbsp;/g, ' ');
-    avyWarningCleanNo = avyWarningClean.replace(/(\r\n|\n|\r)/gm, "");
-    console.log("avy warning");
+    avyBulletin = data.advisory.special_avalanche_bulletin;
+    avyBulletinClean = avyBulletin.replace(/&nbsp;/g, ' ');
+    avyBulletinCleanNo = avyBulletinClean.replace(/(\r\n|\n|\r)/gm, "");
+    console.log("avy Bulletin");
     document.getElementById("slideoutWarning").style.visibility = "visible";
     const warningDiv = document.createElement("div");
-    const avyWarningContent = document.createTextNode(avyWarningCleanNo);
-    warningDiv.appendChild(avyWarningContent);
+    const avyWarningContent = document.createTextNode(avyBulletinCleanNo);
+    warningDiv.appendChild(avyBulletinContent);
     const currentDiv = document.getElementById("slideoutWarning_inner");
     currentDiv.insertAdjacentElement('beforeend', warningDiv);
   }
