@@ -55,6 +55,7 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   document.getElementById("forecastDate").innerText = dateIssued;
   //problem 1
   problemOne = data.advisory.avalanche_problem_1;
+  console.log(problemOne)
   problemOneDesc = data.advisory.avalanche_problem_1_description;
   problemOneDescClean = problemOneDesc.replace(/&nbsp;/g, ' ');
   problemOneDescCleanNo = problemOneDescClean.replace(/(\r\n|\n|\r)/gm, "");
