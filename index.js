@@ -55,6 +55,8 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
     warningDiv.appendChild(avyBulletinContent);
     const currentDiv = document.getElementById("slideoutWarning_inner");
     currentDiv.insertAdjacentElement('beforeend', warningDiv);
+    const warningText = document.getElementById("warning text");
+    document.getElementById("warning text").innerText = "Special Bulletin";
   }
   //full forecast
   avyReport = data.advisory.bottom_line;
