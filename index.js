@@ -44,6 +44,17 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
     warningDiv.appendChild(avyWarningContent);
     const currentDiv = document.getElementById("slideoutWarning_inner");
     currentDiv.insertAdjacentElement('beforeend', warningDiv);
+  } else if (data.advisory.special_avalanche_bulletin) {
+    avyWarning = data.advisory.avalanche_warning;
+    avyWarningClean = avyWarning.replace(/&nbsp;/g, ' ');
+    avyWarningCleanNo = avyWarningClean.replace(/(\r\n|\n|\r)/gm, "");
+    console.log("avy warning");
+    document.getElementById("slideoutWarning").style.visibility = "visible";
+    const warningDiv = document.createElement("div");
+    const avyWarningContent = document.createTextNode(avyWarningCleanNo);
+    warningDiv.appendChild(avyWarningContent);
+    const currentDiv = document.getElementById("slideoutWarning_inner");
+    currentDiv.insertAdjacentElement('beforeend', warningDiv);
   }
   //full forecast
   avyReport = data.advisory.bottom_line;
