@@ -86,11 +86,11 @@ console.log(data.advisory.avalanche_problem_3)
     problemThreeDescCleanNo = problemThreeDescClean.replace(/(\r\n|\n|\r)/gm, "");
     document.getElementById("problem3").innerText = problemThree;
     document.getElementById("problem3Desc").innerText = problemThreeDescCleanNo;
-    document.getElementById("slideout4").style.visibility = "visible";
+    document.getElementById("slideout3").style.visibility = "visible";
     const problem3Div = document.createElement("div");
     const problem3Content = document.createTextNode(problemThreeDescCleanNo);
     problem3Div.appendChild(problem3Content);
-    const current3Div = document.getElementById("slideout4_inner");
+    const current3Div = document.getElementById("slideout3_inner");
     current3Div.insertAdjacentElement('beforeend', problem3Div);
   }
 });
