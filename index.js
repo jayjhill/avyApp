@@ -79,6 +79,7 @@ getAvyData().then(data =>  { overallDanger = data.advisory.overall_danger_rose;
   }
     //problem 3
   if (data.advisory.avalanche_problem_3) {
+console.log(data.advisory.avalanche_problem_3)
     problemThree = data.advisory.avalanche_problem_3;
     problemThreeDesc = data.advisory.avalanche_problem_3_description;
     problemThreeDescClean = problemThreeDesc.replace(/&nbsp;/g, ' ');
